@@ -130,7 +130,7 @@ void diff()
         "Old value = %x\n"
         "New value = %x\n"
         , pos->NO, pos->expression, pos->value, new);
-      // printf("%ld\n", pos->value);
+      printf("%d\n", pos->value);
       pos->value = new;
       nemu_state.state=NEMU_STOP;
       // assert(0);
