@@ -18,11 +18,19 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include "memory/paddr.h"
 
 static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
+
+void info_watchpoint();
+void removing(int no);
+void creat(char *args, int32_t res);
+void wp_difftest();
+void test_expr();
+
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -49,8 +57,94 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  nemu_state.state = NEMU_QUIT;
   return -1;
 }
+
+//New
+static int cmd_si(char *args) {
+  int step = 0;
+  if (args == NULL) step = 1;
+  else {
+    sscanf(args, "%d", &step);
+  }
+  cpu_exec(step);
+  return 0;
+}
+
+static int cmd_w(char *args) {
+  if (!args){
+    printf("Please input: w EXPR\n");
+    return 0;
+  }
+  bool success = true;
+  int32_t res = expr(args, &success);
+  if (!success) {
+    printf("Error!\n");
+  } 
+  else {
+    creat(args, res);
+  }
+  return 0;
+}
+
+static int cmd_p(char *args) {
+  if (args == NULL) {
+    Log("Please input something!!");
+    return 0;
+  }
+  if (strcmp(args, "test") == 0) {
+    test_expr();
+  }
+  else {
+    bool sucess = true;
+    int32_t res = expr(args, &sucess);
+    if(!sucess){
+      printf("NO\n");
+    }
+    else {
+      printf("%d\n", res);
+    }
+  }
+  return 0;
+}
+
+static int cmd_info(char *args) {
+  if(strcmp(args, "r") == 0) {
+    isa_reg_display();
+  }
+  else if(strcmp(args, "w") == 0) {
+    info_watchpoint();
+  }
+  return 0;
+}
+
+static int cmd_d(char *args) {
+  char *arg = strtok(NULL, "");
+  if (!arg) {
+    printf("Usage: d N\n");
+    return 0;
+  }
+  int no = strtol(arg, NULL, 10);
+  removing(no);
+  return 0;
+}
+
+static int cmd_x(char *args) {
+  int n;
+  uint64_t addr;
+  char *first_c = strtok(args, " ");
+  char *addr_c = strtok(NULL, " ");
+  sscanf(first_c, "%d", &n);
+  sscanf(addr_c, "%lx", &addr);
+  for (int i = 0; i < n; i++) {
+    printf("%#x\n", paddr_read(addr, 4));
+    addr += 4;
+  }
+  return 0;
+}
+
+
 
 static int cmd_help(char *args);
 
@@ -62,6 +156,12 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  {"si", "One Step to Exec", cmd_si},
+  {"x", "Scan the Mem", cmd_x},
+  {"info", "Print the Regs", cmd_info},
+  {"p", "Calu the Expr", cmd_p},
+  {"w", "Set the Watchpoint", cmd_w},
+  {"d", "Delete the Watchpoint", cmd_d}
 
   /* TODO: Add more commands */
 
@@ -132,6 +232,33 @@ void sdb_mainloop() {
 
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
+}
+
+void test_expr() {
+  FILE *fp = fopen("/home/tianyi/ysyx/ysyx-workbench/nemu/tools/gen-expr/build/input", "r");
+
+  char *e = NULL;
+  word_t test_value;
+  size_t len = 0;
+  size_t read;
+  bool success = true;
+  while (true) {
+    if(fscanf(fp, "%d ", &test_value) == -1) break;
+    // printf("%ld\n", test_value);
+    read = getline(&e, &len, fp);
+    e[read-1] = '\0';
+    word_t res = expr(e, &success);
+    
+    assert(success);
+    if (res != test_value) {
+      printf("expected: %d, now: %d\n", test_value, res);
+      assert(0);
+    }
+  }
+
+  fclose(fp);
+  if (e) free(e);
+  Log("Sucess!!");
 }
 
 void init_sdb() {
