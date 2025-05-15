@@ -128,7 +128,7 @@ void diff()
     if (pos->value != new) {
       Log("Watchpoint %d: %s\n"
         "Old value = %x\n"
-        "New value = %x\n"
+        "New value = %x"
         , pos->NO, pos->expression, pos->value, new);
       // printf("%d\n", pos->value);
       pos->value = new;
