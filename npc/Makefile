@@ -42,11 +42,11 @@ TOPNAME = Top
 PRJ = playground
 
 VSRCS += $(shell find $(abspath ./vsrc) -name "*.sv")
-CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp" -or -name "*.cc")
+CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp" -or -name "*.cc" -or -name "*.c")
 
 VERILATOR = verilator
 # VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread $(shell llvm-config --cxxflags | sed 's/-D__STDC_FORMAT_MACROS//') -I$(abspath ./csrc)" -LDFLAGS "-pthread -latomic -lreadline $(shell llvm-config --libs)"
-VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread -I$(abspath ./csrc)" -LDFLAGS "-pthread -latomic -lreadline -lLLVM-18"
+VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread -I$(abspath ./csrc)" -I/home/tianyi/ysyx/ysyx_workbench/nemu/tools/capstone/repo/include -LDFLAGS "-pthread -latomic -lreadline -lLLVM-18"
 
 OBJ_DIR = ./obj_dir
 VERILOG_DIR = ./build

@@ -35,11 +35,11 @@ VM_PREFIX = VTop
 VM_MODPREFIX = VTop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-std=c++17 -pthread -I/home/tianyi/ysyx/ysyx-workbench/npc/csrc -DCONFIG_ISA_riscv -DCONFIG_ISA64=0 -DMUXDEF\(x,y,z\)=\(y\) \
+	-std=c++17 -pthread -I/home/tianyi/ysyx/ysyx-workbench/npc/csrc \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	-pthread -latomic -lreadline \
+	-pthread -latomic -lreadline -lLLVM-18 \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
@@ -49,6 +49,7 @@ VM_USER_CLASSES = \
 	reg \
 	main \
 	monitor \
+	disasm \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
@@ -58,6 +59,7 @@ VM_USER_DIR = \
 	/home/tianyi/ysyx/ysyx-workbench/npc/csrc/core/memory \
 	/home/tianyi/ysyx/ysyx-workbench/npc/csrc/core/reg \
 	/home/tianyi/ysyx/ysyx-workbench/npc/csrc/monitor \
+	/home/tianyi/ysyx/ysyx-workbench/npc/csrc/utils/disasm \
 
 
 ### Default rules...
@@ -80,6 +82,8 @@ reg.o: /home/tianyi/ysyx/ysyx-workbench/npc/csrc/core/reg/reg.cpp
 main.o: /home/tianyi/ysyx/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 monitor.o: /home/tianyi/ysyx/ysyx-workbench/npc/csrc/monitor/monitor.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+disasm.o: /home/tianyi/ysyx/ysyx-workbench/npc/csrc/utils/disasm/disasm.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)

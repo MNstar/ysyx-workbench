@@ -152,6 +152,37 @@
 #include <capstone/capstone.h>
 #include <common/common.h>
 
+
+#define str_temp(x) #x
+#define str(x) str_temp(x)
+
+// strlen() for string constant
+#define STRLEN(CONST_STR) (sizeof(CONST_STR) - 1)
+
+// calculate the length of an array
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
+
+// macro concatenation
+#define concat_temp(x, y) x ## y
+#define concat(x, y) concat_temp(x, y)
+#define concat3(x, y, z) concat(concat(x, y), z)
+#define concat4(x, y, z, w) concat3(concat(x, y), z, w)
+#define concat5(x, y, z, v, w) concat4(concat(x, y), z, v, w)
+
+// macro testing
+// See https://stackoverflow.com/questions/26099745/test-if-preprocessor-symbol-is-defined-inside-macro
+#define CHOOSE2nd(a, b, ...) b
+#define MUX_WITH_COMMA(contain_comma, a, b) CHOOSE2nd(contain_comma a, b)
+#define MUX_MACRO_PROPERTY(p, macro, a, b) MUX_WITH_COMMA(concat(p, macro), a, b)
+// define placeholders for some property
+#define __P_DEF_0  X,
+#define __P_DEF_1  X,
+#define __P_ONE_1  X,
+#define __P_ZERO_0 X,
+// define some selection functions based on the properties of BOOLEAN macro
+#define MUXDEF(macro, X, Y)  MUX_MACRO_PROPERTY(__P_DEF_, macro, X, Y)
+
+
 static size_t (*cs_disasm_dl)(csh handle, const uint8_t *code,
     size_t code_size, uint64_t address, size_t count, cs_insn **insn);
 static void (*cs_free_dl)(cs_insn *insn, size_t count);
@@ -175,14 +206,9 @@ extern "C" void init_disasm() {
   cs_free_dl = dlsym(dl_handle, "cs_free");
   assert(cs_free_dl);
 
-  cs_arch arch = MUXDEF(CONFIG_ISA_x86,      CS_ARCH_X86,
-                   MUXDEF(CONFIG_ISA_mips32, CS_ARCH_MIPS,
-                   MUXDEF(CONFIG_ISA_riscv,  CS_ARCH_RISCV,
-                   MUXDEF(CONFIG_ISA_loongarch32r,  CS_ARCH_LOONGARCH, -1))));
-  cs_mode mode = MUXDEF(CONFIG_ISA_x86,      CS_MODE_32,
-                   MUXDEF(CONFIG_ISA_mips32, CS_MODE_MIPS32,
-                   MUXDEF(CONFIG_ISA_riscv,  MUXDEF(CONFIG_ISA64, CS_MODE_RISCV64, CS_MODE_RISCV32) | CS_MODE_RISCVC,
-                   MUXDEF(CONFIG_ISA_loongarch32r,  CS_MODE_LOONGARCH32, -1))));
+  cs_arch arch = CS_ARCH_RISCV;
+                  
+  cs_mode mode = CS_MODE_RISCV32;
 	int ret = cs_open_dl(arch, mode, &handle);
   assert(ret == CS_ERR_OK);
 
