@@ -42,12 +42,11 @@ TOPNAME = Top
 PRJ = playground
 
 VSRCS += $(shell find $(abspath ./vsrc) -name "*.sv")
-CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp" -or -name "*.cc" -or -name "*.c")
+CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp" -or -name "*.cc")
 
 VERILATOR = verilator
-VERILATOR_CFLAGS += --trace -cc --exe --build
-VERILATOR_CFLAGS += -CFLAGS "-std=c++17 -pthread -I$(abspath ./csrc) $(shell llvm-config --cxxflags)"
-VERILATOR_CFLAGS += -LDFLAGS "-pthread -latomic -lreadline $(shell llvm-config --ldflags --libs)"
+# VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread $(shell llvm-config --cxxflags | sed 's/-D__STDC_FORMAT_MACROS//') -I$(abspath ./csrc)" -LDFLAGS "-pthread -latomic -lreadline $(shell llvm-config --libs)"
+VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread -I$(abspath ./csrc)" -LDFLAGS "-pthread -latomic -lreadline -lLLVM-18"
 
 OBJ_DIR = ./obj_dir
 VERILOG_DIR = ./build
