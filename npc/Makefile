@@ -41,17 +41,22 @@
 TOPNAME = Top
 PRJ = playground
 
-VSRCS += $(shell find $(abspath ./vsrc) -name "*.sv")
-CSRCS += $(shell find $(abspath ./csrc) -name "*.cpp" -or -name "*.cc" -or -name "*.c")
+# C/C++源文件和SystemVerilog源文件
+VSRCS = $(abspath ./build/$(TOPNAME).sv)
+CSRCS = $(shell find $(abspath ./csrc) -name "*.cpp" -or -name "*.cc" -or -name "*.c")
 
+# Verilator配置
 VERILATOR = verilator
-# VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread $(shell llvm-config --cxxflags | sed 's/-D__STDC_FORMAT_MACROS//') -I$(abspath ./csrc)" -LDFLAGS "-pthread -latomic -lreadline $(shell llvm-config --libs)"
-VERILATOR_CFLAGS += --trace -cc --exe --build -CFLAGS "-std=c++17 -pthread -I$(abspath ./csrc)" -LDFLAGS "-pthread -latomic -lreadline -lLLVM-18"
+VERILATOR_CFLAGS += --trace -cc --exe --build
+VERILATOR_CFLAGS += -CFLAGS "-std=c++17 -pthread -I$(abspath ./csrc)"
+VERILATOR_CFLAGS += -LDFLAGS "-pthread -lreadline"
 
+# 输出目录
 OBJ_DIR = ./obj_dir
 VERILOG_DIR = ./build
 
-BIN = $(OBJ_DIR)/$(TOPNAME)
+# 可执行文件
+BIN = $(OBJ_DIR)/V$(TOPNAME)
 IMG ?=
 RUN_ARGS := --img=$(IMG) --diff=$(DIFF)
 
@@ -62,7 +67,6 @@ verilog:
 	$(call git_commit, "generate verilog")
 	mkdir -p $(VERILOG_DIR)
 	mill -i $(PRJ).runMain Elaborate --target-dir $(VERILOG_DIR)
-	# python clean.py
 
 help:
 	mill -i $(PRJ).runMain Elaborate --help
@@ -82,14 +86,15 @@ idea:
 clean:
 	-rm -rf $(OBJ_DIR)
 
-.PHONY: test verilog help reformat checkformat clean
+.PHONY: test verilog help reformat checkformat clean sim wave
 
 sim: 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "Write this Makefile by yourself."
-	$(VERILATOR) $(VERILATOR_CFLAGS) $(VERILOG_DIR)/$(TOPNAME).sv ${CSRCS} 
+	echo $(IMG)
+	$(VERILATOR) $(VERILATOR_CFLAGS) $(VSRCS) $(CSRCS)
 	@$(MAKE) -s -j5 -C $(OBJ_DIR) -f V$(TOPNAME).mk V$(TOPNAME)
-	$(OBJ_DIR)/V$(TOPNAME) -i /home/tianyi/ysyx/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin
+	# $(BIN) -i /home/tianyi/ysyx/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin
+	$(BIN) -i $(IMG)
 
 wave: 
 	gtkwave waveform.vcd
