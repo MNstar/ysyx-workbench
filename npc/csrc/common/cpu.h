@@ -4,7 +4,7 @@
 #include "common.h"
 
 // CPU执行相关函数
-void cpu_exec(int n);
+void cpu_exec(uint64_t n);
 void init_fir();
 
 // 调试相关函数
