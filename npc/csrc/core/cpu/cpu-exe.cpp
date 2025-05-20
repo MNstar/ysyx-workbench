@@ -77,7 +77,7 @@ void execute(uint64_t n) {
 }
 
 
-void cpu_exec(uint64_t n) {
+void cpu_exec(int n) {
     g_print_step = (n < MAX_INST_TO_PRINT);
     if(npc_state == NEMU_EXIT) {
         printf("Program execution has ended. To restart the program, exit NPC and run again.\n");
