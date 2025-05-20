@@ -93,7 +93,6 @@ sim:
 	echo npc $(IMG)
 	$(VERILATOR) $(VERILATOR_CFLAGS) $(VSRCS) $(CSRCS)
 	@$(MAKE) -s -j5 -C $(OBJ_DIR) -f V$(TOPNAME).mk V$(TOPNAME)
-	# $(BIN) -i /home/tianyi/ysyx/ysyx-workbench/am-kernels/tests/cpu-tests/build/dummy-riscv32e-npc.bin
 	$(BIN) -i $(IMG)
 
 wave: 

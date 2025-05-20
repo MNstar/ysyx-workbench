@@ -14,10 +14,12 @@
 #include "common/init.h"
 #include "common/common.h"
 
+#define MAX_INST_TO_PRINT 10
+static bool g_print_step = false;
+
 VTop *dut = new VTop;
 VerilatedVcdC *m_trace;
 VerilatedContext* contextp;
-
 
 char logbuf[128];
 
@@ -60,13 +62,9 @@ void exec_once() {
     memset(p, ' ', 1);
     p += 1;
     disassemble(p, logbuf+sizeof(logbuf)-p, dut->io_pc, inst, 4);
-    //printf("inst1 = %08x\n", inst_data);
-    //printf("log1 = %s\n", logbuf);
-    //printf("npc_state1 = %d\n", npc_state);
     dut->eval();
-    //printf("inst2 = %08x\n", inst_data);
-    printf("%s\n", logbuf);
-    //printf("npc_state2 = %d\n", npc_state);
+    // if(g_print_step) printf("%s\n", logbuf);
+    if(g_print_step) puts(logbuf);
     contextp->timeInc(1);
     m_trace->dump(contextp->time());
 }
@@ -80,6 +78,7 @@ void execute(uint64_t n) {
 
 
 void cpu_exec(int n) {
+    g_print_step = (n < MAX_INST_TO_PRINT);
     if(npc_state == NEMU_EXIT) {
         printf("Program execution has ended. To restart the program, exit NPC and run again.\n");
         return;
@@ -92,7 +91,7 @@ void cpu_exec(int n) {
     }
     //execute(n);
 }
-    
+
 
 
 
