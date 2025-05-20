@@ -103,6 +103,7 @@ void assert_fail_msg() {
 void cpu_exec(uint64_t n) {
   printf("n = %lu\n", n);
   g_print_step = (n < MAX_INST_TO_PRINT);
+  if (g_print_step) printf("yes\n");
   switch (nemu_state.state) {
     case NEMU_END: case NEMU_ABORT: case NEMU_QUIT:
       printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
