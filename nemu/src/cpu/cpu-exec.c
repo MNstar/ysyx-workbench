@@ -60,6 +60,11 @@ static void execute(uint64_t n) {
   for (;n > 0; n --) {
     exec_once(&s, cpu.pc);
     if(cpu.pc == 0x80000258) {printf("__trm_init__\n");}
+    if(cpu.pc == 0x80000108) {printf("f3\n");}
+    if(cpu.pc == 0x800000a4) {printf("f2\n");}
+    if(cpu.pc == 0x80000010) {printf("f0\n");}
+    if(cpu.pc == 0x8000005c) {printf("f1\n");}
+
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
