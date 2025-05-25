@@ -54,32 +54,32 @@ class Decoder extends Module {
     val imm_U = Cat(io.inst(31, 12), Fill(12, 0.U))
     val imm_J = Cat(Fill(12, io.inst(31)), io.inst(31), io.inst(19, 12), io.inst(20), io.inst(30, 21), 0.U(1.W))
     
-    val default = List(IMM_X, OP1_X, OP2_X, ST_XXX, JUMP_N, ALU_X, LOAD_N, STORE_N, REG_STORE_N)
+    val default = List(IMM_X, OP1_X, OP2_X, ST_XXX, JUMP_N, ALU_X, LOAD_N, STORE_N, REG_STORE_N, LD_XXX)
 
     val map = Array(
-        ADDI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        JAL     -> List(IMM_J, OP1_PC , OP2_IMM, ST_XXX, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        JALR    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        AUIPC   -> List(IMM_U, OP1_PC , OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        LUI     -> List(IMM_U, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        EBREAK  -> List(IMM_I, OP1_RS1, OP2_RS2, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_N),
-        ADDIW   -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        SLTIU   -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_SLI, LOAD_N, STORE_N, REG_STORE_Y),   
-        SLLI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_SLL, LOAD_N, STORE_N, REG_STORE_Y),   
-        ANDI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_AND, LOAD_N, STORE_N, REG_STORE_Y), 
-            
-        LW      -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_Y, STORE_N, REG_STORE_Y),
-    //     LH      -> List(),  
-    //     LD      -> List(), 
+        ADDI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),
+        JAL     -> List(IMM_J, OP1_PC , OP2_IMM, ST_XXX, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),
+        JALR    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),
+        AUIPC   -> List(IMM_U, OP1_PC , OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),
+        LUI     -> List(IMM_U, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),
+        EBREAK  -> List(IMM_I, OP1_RS1, OP2_RS2, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_N, LD_XXX),
+        ADDIW   -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),
+        SLTIU   -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_SLI, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),   
+        SLLI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_SLL, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX),   
+        ANDI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_AND, LOAD_N, STORE_N, REG_STORE_Y, LD_XXX), 
+
+        LW      -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_Y, STORE_N, REG_STORE_Y, LD_LW ),
+        LH      -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_Y, STORE_N, REG_STORE_Y, LD_LH ),  
+        LD      -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_Y, STORE_N, REG_STORE_Y, LD_LD ), 
     //     LBH     -> List(),   
     //     XORI    -> List(),  
     //     SRLI    -> List(),    
     //     SRAI    -> List(),   
     //     LHU     -> List(),   
  
-        SW      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SW , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N), 
-        SB      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SB , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N),
-        SH      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SH , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N), 
+        SW      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SW , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N, LD_XXX), 
+        SB      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SB , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N, LD_XXX),
+        SH      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SH , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N, LD_XXX), 
 
     //     ADDW    -> List(),
     //     ADD     -> List(),
@@ -115,16 +115,24 @@ class Decoder extends Module {
     val ctrlStore = ctrlsignals(7)
     val ctrlRegWrite = ctrlsignals(8)
     val st_tape = ctrlsignals(3)
+    val ld_tape = ctrlsignals(9)
 
     val imm = MuxCase(
         0.U(32.W),
         Seq(
-            (ctrlsignals(0) === IMM_I) -> imm_I,
+            (ctrlsignals(0) === IMM_I) -> MuxCase(
+                0.U(32.W),
+                Seq(
+                    (ld_tape === LD_LD) -> imm_I(7, 0),
+                    (ld_tape === LD_LH) -> imm_I(15, 0),
+                    (ld_tape === LD_LW) -> imm_I,
+                )
+            ),
             (ctrlsignals(0) === IMM_S) -> MuxCase(
                 0.U(32.W),
                 Seq(
                     (st_tape === ST_SB) -> imm_S(7, 0),
-                    (st_tape === ST_SH) -> imm_S(16, 0),
+                    (st_tape === ST_SH) -> imm_S(15, 0),
                     (st_tape === ST_SW) -> imm_S,
                 )
             ),

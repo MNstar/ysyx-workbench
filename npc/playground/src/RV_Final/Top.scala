@@ -31,6 +31,8 @@ class Top extends Module {
     registers.io.bundleReg <> decoder.io.bundleReg
     registers.io.pc <> pcReg.io.addrOut
     registers.io.resultAlu <> alu.io.resultAlu
+    registers.io.memRdata <> mem.io.rdata
+    registers.io.memCtrlLoad <> decoder.io.bundleMemDataControl.ctrlLoad
 
     mem.io.clock := clock
     mem.io.bundleMemDataControl <> decoder.io.bundleMemDataControl

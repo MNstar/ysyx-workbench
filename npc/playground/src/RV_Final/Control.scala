@@ -40,6 +40,11 @@ object CtrlDecoder {
     val ST_SH  = 2.U(2.W)
     val ST_SW  = 2.U(2.W)
 
+    val LD_XXX = 0.U(2.W)
+    val LD_LD  = 1.U(2.W)
+    val LD_LH  = 2.U(2.W)
+    val LD_LW  = 3.U(2.W)
+
     //regstore_sel
     val REG_STORE_N = false.B
     val REG_STORE_Y = true.B
