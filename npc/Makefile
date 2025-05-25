@@ -90,7 +90,6 @@ clean:
 
 sim: 
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	echo npc $(IMG)
 	$(VERILATOR) $(VERILATOR_CFLAGS) $(VSRCS) $(CSRCS)
 	@$(MAKE) -s -j5 -C $(OBJ_DIR) -f V$(TOPNAME).mk V$(TOPNAME)
 	$(BIN) -i $(IMG)

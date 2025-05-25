@@ -46,7 +46,7 @@ VL_ATTR_COLD void VTop___024root___eval_settle(VTop___024root* vlSelf) {
 #ifdef VL_DEBUG
             VTop___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 460, "", "Settle region did not converge.");
+            VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 461, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;
@@ -134,14 +134,35 @@ VL_ATTR_COLD void VTop___024root___stl_sequent__TOP__0(VTop___024root* vlSelf) {
         = ((0x13U != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
            & ((0x6fU == (0x7fU & vlSelf->Top__DOT___memInst_inst)) 
               | (0x67U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))));
-    vlSelf->Top__DOT__decoder__DOT___GEN_0 = ((0x123U 
+    vlSelf->Top__DOT__decoder__DOT___GEN_2 = ((0x13U 
+                                               == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+                                              | ((0x6fU 
+                                                  == 
+                                                  (0x7fU 
+                                                   & vlSelf->Top__DOT___memInst_inst)) 
+                                                 | ((0x67U 
+                                                     == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+                                                    | (0x17U 
+                                                       == 
+                                                       (0x7fU 
+                                                        & vlSelf->Top__DOT___memInst_inst)))));
+    vlSelf->Top__DOT__decoder__DOT___GEN_0 = ((0x100073U 
+                                               == vlSelf->Top__DOT___memInst_inst) 
+                                              | (0x1bU 
+                                                 == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)));
+    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = 
+        (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+          | ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+             | (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))
+          ? 1U : ((0x100073U == vlSelf->Top__DOT___memInst_inst)
+                   ? 2U : (0x1bU == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))));
+    vlSelf->Top__DOT__decoder__DOT___GEN_1 = ((0x123U 
                                                == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
                                               | ((0x37U 
                                                   == 
                                                   (0x7fU 
                                                    & vlSelf->Top__DOT___memInst_inst)) 
-                                                 | (0x100073U 
-                                                    == vlSelf->Top__DOT___memInst_inst)));
+                                                 | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0)));
     if ((0x13U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))) {
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 = 1U;
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 = 2U;
@@ -158,23 +179,11 @@ VL_ATTR_COLD void VTop___024root___stl_sequent__TOP__0(VTop___024root* vlSelf) {
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 
             = ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))
                 ? 2U : ((0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))
-                         ? 3U : (0x100073U == vlSelf->Top__DOT___memInst_inst)));
+                         ? 3U : (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0)));
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 
-            = ((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0) 
+            = ((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
                << 1U);
     }
-    vlSelf->Top__DOT__decoder__DOT___GEN_1 = ((0x13U 
-                                               == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                              | ((0x6fU 
-                                                  == 
-                                                  (0x7fU 
-                                                   & vlSelf->Top__DOT___memInst_inst)) 
-                                                 | ((0x67U 
-                                                     == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                                    | (0x17U 
-                                                       == 
-                                                       (0x7fU 
-                                                        & vlSelf->Top__DOT___memInst_inst)))));
     vlSelf->Top__DOT__decoder__DOT__imm = ((1U == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0))
                                             ? (((QData)((IData)(
                                                                 (0xfffffU 
@@ -244,14 +253,8 @@ VL_ATTR_COLD void VTop___024root___stl_sequent__TOP__0(VTop___024root* vlSelf) {
                                                                                 & (vlSelf->Top__DOT___memInst_inst 
                                                                                 >> 7U)))))
                                                                          : 0U)))))));
-    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = 
-        (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-          | ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-             | (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))
-          ? 1U : ((0x100073U == vlSelf->Top__DOT___memInst_inst) 
-                  << 1U));
-    vlSelf->Top__DOT___alu_io_resultAlu = (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-                                            | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0))
+    vlSelf->Top__DOT___alu_io_resultAlu = (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+                                            | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1))
                                             ? (((1U 
                                                  == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1))
                                                  ? vlSelf->Top__DOT__pcReg__DOT__regPC
@@ -362,13 +365,17 @@ VL_ATTR_COLD void VTop___024root___stl_sequent__TOP__0(VTop___024root* vlSelf) {
                                                     : 0U)))
                                             : 0U);
     vlSelf->Top__DOT__registers__DOT___regs_T_5 = (
-                                                   (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
+                                                   (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
                                                      | ((0x123U 
                                                          != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                                        & (0x37U 
-                                                           == 
-                                                           (0x7fU 
-                                                            & vlSelf->Top__DOT___memInst_inst)))) 
+                                                        & ((0x37U 
+                                                            == 
+                                                            (0x7fU 
+                                                             & vlSelf->Top__DOT___memInst_inst)) 
+                                                           | ((0x100073U 
+                                                               != vlSelf->Top__DOT___memInst_inst) 
+                                                              & (0x1bU 
+                                                                 == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)))))) 
                                                     & (0U 
                                                        != 
                                                        (0x1fU 
@@ -472,11 +479,12 @@ VL_ATTR_COLD void VTop___024root___ctor_var_reset(VTop___024root* vlSelf) {
     vlSelf->Top__DOT___decoder_io_bundleRegDataControl_ctrlJump = VL_RAND_RESET_I(1);
     vlSelf->Top__DOT__pcReg__DOT__regPC = VL_RAND_RESET_I(32);
     vlSelf->Top__DOT__decoder__DOT___GEN = VL_RAND_RESET_I(10);
-    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 = VL_RAND_RESET_I(3);
     vlSelf->Top__DOT__decoder__DOT___GEN_0 = VL_RAND_RESET_I(1);
+    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 = VL_RAND_RESET_I(3);
+    vlSelf->Top__DOT__decoder__DOT___GEN_1 = VL_RAND_RESET_I(1);
     vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 = VL_RAND_RESET_I(2);
     vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = VL_RAND_RESET_I(2);
-    vlSelf->Top__DOT__decoder__DOT___GEN_1 = VL_RAND_RESET_I(1);
+    vlSelf->Top__DOT__decoder__DOT___GEN_2 = VL_RAND_RESET_I(1);
     vlSelf->Top__DOT__decoder__DOT__imm = VL_RAND_RESET_Q(33);
     vlSelf->Top__DOT__registers__DOT__regs_0 = VL_RAND_RESET_I(32);
     vlSelf->Top__DOT__registers__DOT__regs_1 = VL_RAND_RESET_I(32);

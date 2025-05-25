@@ -20,8 +20,9 @@ class Alu extends Module {
     val result = MuxCase(
         0.U(32.W),
         Seq(
-            (option === ALU_ADD) -> (oprand1 +& oprand2),
-            (option === ALU_SUB) -> (oprand1 -& oprand2),
+            (option === ALU_ADD) -> (oprand1 + oprand2),
+            (option === ALU_SUB) -> (oprand1 - oprand2),
+            (option === ALU_SLI) -> (oprand1 < oprand2)
         )
     )
     io.resultAlu := result

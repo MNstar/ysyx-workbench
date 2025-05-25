@@ -54,31 +54,80 @@ class Decoder extends Module {
     val imm_U = Cat(io.inst(31, 12), Fill(12, 0.U))
     val imm_J = Cat(Fill(12, io.inst(31)), io.inst(31), io.inst(19, 12), io.inst(20), io.inst(30, 21), 0.U(1.W))
     
-    val default = List(IMM_X, OP1_X, OP2_X, JUMP_N, ALU_X, LOAD_N, STORE_N, REG_STORE_N)
+    val default = List(IMM_X, OP1_X, OP2_X, ST_XXX, JUMP_N, ALU_X, LOAD_N, STORE_N, REG_STORE_N)
 
     val map = Array(
-        ADDI    -> List(IMM_I, OP1_RS1, OP2_IMM, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        JAL     -> List(IMM_J, OP1_PC, OP2_IMM, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        JALR    -> List(IMM_I, OP1_RS1, OP2_IMM, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        AUIPC   -> List(IMM_U, OP1_PC, OP2_IMM, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        SW      -> List(IMM_S, OP1_RS1, OP2_IMM, JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N),
-        LUI     -> List(IMM_U, OP1_RS1, OP2_IMM, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
-        EBREAK  -> List(IMM_I, OP1_RS1, OP2_RS2, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_N)
+        ADDI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
+        JAL     -> List(IMM_J, OP1_PC , OP2_IMM, ST_XXX, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
+        JALR    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_Y, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
+        AUIPC   -> List(IMM_U, OP1_PC , OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
+        LUI     -> List(IMM_U, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
+        EBREAK  -> List(IMM_I, OP1_RS1, OP2_RS2, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_N),
+        ADDIW   -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_N, STORE_N, REG_STORE_Y),
+        SLTIU   -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_SLI, LOAD_N, STORE_N, REG_STORE_Y),   
+        SLLI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_SLL, LOAD_N, STORE_N, REG_STORE_Y),   
+        ANDI    -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_AND, LOAD_N, STORE_N, REG_STORE_Y), 
+            
+        LW      -> List(IMM_I, OP1_RS1, OP2_IMM, ST_XXX, JUMP_N, ALU_ADD, LOAD_Y, STORE_N, REG_STORE_Y),
+    //     LH      -> List(),  
+    //     LD      -> List(), 
+    //     LBH     -> List(),   
+    //     XORI    -> List(),  
+    //     SRLI    -> List(),    
+    //     SRAI    -> List(),   
+    //     LHU     -> List(),   
+ 
+        SW      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SW , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N), 
+        SB      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SB , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N),
+        SH      -> List(IMM_S, OP1_RS1, OP2_IMM, ST_SH , JUMP_N, ALU_ADD, LOAD_N, STORE_Y, REG_STORE_N), 
+
+    //     ADDW    -> List(),
+    //     ADD     -> List(),
+    //     SUB     -> List(),
+    //     OR      -> List(),
+    //     AND     -> List(),
+    //     SUBW    -> List(),
+    //     XOR     -> List(),
+    //     SLTU    -> List(),
+    //     SLL     -> List(),
+    //     SRL     -> List(),
+    //     MUL     -> List(),
+    //     DIV     -> List(),
+    //     MULH    -> List(),
+    //     SRA     -> List(),
+    //     REM     -> List(),
+    //     REMU    -> List(),
+    //     DIVU    -> List(),
+
+    //     BGE     -> List(),
+    //     BEQ     -> List(),
+    //     BNE     -> List(),
+    //     BLT     -> List(),
+    //     BGEU    -> List(),
+    //     BLTU    -> List(),
     )
 
     val ctrlsignals = ListLookup(io.inst, default, map)
 
-    val ctrlJump = ctrlsignals(3)
-    val option = ctrlsignals(4)
-    val ctrlLoad = ctrlsignals(5)
-    val ctrlStore = ctrlsignals(6)
-    val ctrlRegWrite = ctrlsignals(7)
+    val ctrlJump = ctrlsignals(4)
+    val option = ctrlsignals(5)
+    val ctrlLoad = ctrlsignals(6)
+    val ctrlStore = ctrlsignals(7)
+    val ctrlRegWrite = ctrlsignals(8)
+    val st_tape = ctrlsignals(3)
 
     val imm = MuxCase(
         0.U(32.W),
         Seq(
             (ctrlsignals(0) === IMM_I) -> imm_I,
-            (ctrlsignals(0) === IMM_S) -> imm_S,
+            (ctrlsignals(0) === IMM_S) -> MuxCase(
+                0.U(32.W),
+                Seq(
+                    (st_tape === ST_SB) -> imm_S(7, 0),
+                    (st_tape === ST_SH) -> imm_S(16, 0),
+                    (st_tape === ST_SW) -> imm_S,
+                )
+            ),
             (ctrlsignals(0) === IMM_U) -> imm_U,
             (ctrlsignals(0) === IMM_J) -> imm_J,
             (ctrlsignals(0) === IMM_B) -> imm_B,

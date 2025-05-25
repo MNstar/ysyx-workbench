@@ -282,8 +282,8 @@ VL_ATTR_COLD void VTop___024root__trace_full_0_sub_0(VTop___024root* vlSelf, Ver
                                                                    & (vlSelf->Top__DOT___memInst_inst 
                                                                       >> 0x14U)), 5U)))))
                                   : 0U))),32);
-    bufp->fullCData(oldp+3,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-                             | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0))),4);
+    bufp->fullCData(oldp+3,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+                             | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1))),4);
     bufp->fullIData(oldp+4,(vlSelf->Top__DOT___alu_io_resultAlu),32);
     bufp->fullIData(oldp+5,(vlSelf->Top__DOT___memInst_inst),32);
     bufp->fullIData(oldp+6,(((0U == (0x1fU & (vlSelf->Top__DOT___memInst_inst 
@@ -364,12 +364,15 @@ VL_ATTR_COLD void VTop___024root__trace_full_0_sub_0(VTop___024root* vlSelf, Ver
                                       >> 0x14U))),5);
     bufp->fullCData(oldp+10,((0x1fU & (vlSelf->Top__DOT___memInst_inst 
                                        >> 7U))),5);
-    bufp->fullBit(oldp+11,(((~ (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1)) 
+    bufp->fullBit(oldp+11,(((~ (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2)) 
                             & (0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)))));
     bufp->fullBit(oldp+12,(vlSelf->Top__DOT___decoder_io_bundleRegDataControl_ctrlJump));
-    bufp->fullBit(oldp+13,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
+    bufp->fullBit(oldp+13,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
                             | ((0x123U != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                               & (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))));
+                               & ((0x37U == (0x7fU 
+                                             & vlSelf->Top__DOT___memInst_inst)) 
+                                  | ((0x100073U != vlSelf->Top__DOT___memInst_inst) 
+                                     & (0x1bU == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))))))));
     bufp->fullCData(oldp+14,(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0),3);
     bufp->fullCData(oldp+15,(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1),2);
     bufp->fullCData(oldp+16,(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2),2);

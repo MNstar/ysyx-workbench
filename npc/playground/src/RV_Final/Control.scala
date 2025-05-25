@@ -35,6 +35,11 @@ object CtrlDecoder {
     val STORE_N = false.B
     val STORE_Y = true.B
 
+    val ST_XXX = 0.U(2.W)
+    val ST_SB  = 1.U(2.W)
+    val ST_SH  = 2.U(2.W)
+    val ST_SW  = 2.U(2.W)
+
     //regstore_sel
     val REG_STORE_N = false.B
     val REG_STORE_Y = true.B
@@ -43,7 +48,10 @@ object CtrlDecoder {
 
 object CtrlAluOP {
     val ALU_X = 0.U(4.W)
-    val ALU_ADD = 1.U(4.W)
-    val ALU_SUB = 2.U(4.W)
+    val ALU_ADD = 1.U(4.W) // +
+    val ALU_SUB = 2.U(4.W) // -
+    val ALU_SLI = 3.U(4.W) // <
+    val ALU_SLL = 4.U(4.W) // <<
+    val ALU_AND = 5.U(4.W) // &
 }
 

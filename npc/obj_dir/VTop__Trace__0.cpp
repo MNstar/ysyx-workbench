@@ -117,8 +117,8 @@ void VTop___024root__trace_chg_0_sub_0(VTop___024root* vlSelf, VerilatedVcd::Buf
                                                                       & (vlSelf->Top__DOT___memInst_inst 
                                                                          >> 0x14U)), 5U)))))
                                      : 0U))),32);
-        bufp->chgCData(oldp+2,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-                                | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0))),4);
+        bufp->chgCData(oldp+2,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+                                | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1))),4);
         bufp->chgIData(oldp+3,(vlSelf->Top__DOT___alu_io_resultAlu),32);
         bufp->chgIData(oldp+4,(vlSelf->Top__DOT___memInst_inst),32);
         bufp->chgIData(oldp+5,(((0U == (0x1fU & (vlSelf->Top__DOT___memInst_inst 
@@ -201,13 +201,16 @@ void VTop___024root__trace_chg_0_sub_0(VTop___024root* vlSelf, VerilatedVcd::Buf
                                          >> 0x14U))),5);
         bufp->chgCData(oldp+9,((0x1fU & (vlSelf->Top__DOT___memInst_inst 
                                          >> 7U))),5);
-        bufp->chgBit(oldp+10,(((~ (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1)) 
+        bufp->chgBit(oldp+10,(((~ (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2)) 
                                & (0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)))));
         bufp->chgBit(oldp+11,(vlSelf->Top__DOT___decoder_io_bundleRegDataControl_ctrlJump));
-        bufp->chgBit(oldp+12,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
+        bufp->chgBit(oldp+12,(((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
                                | ((0x123U != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                  & (0x37U == (0x7fU 
-                                               & vlSelf->Top__DOT___memInst_inst))))));
+                                  & ((0x37U == (0x7fU 
+                                                & vlSelf->Top__DOT___memInst_inst)) 
+                                     | ((0x100073U 
+                                         != vlSelf->Top__DOT___memInst_inst) 
+                                        & (0x1bU == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))))))));
         bufp->chgCData(oldp+13,(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0),3);
         bufp->chgCData(oldp+14,(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1),2);
         bufp->chgCData(oldp+15,(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2),2);

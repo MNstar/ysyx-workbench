@@ -17,11 +17,12 @@ class alignas(VL_CACHE_LINE_BYTES) VTop___024root final : public VerilatedModule
     VL_IN8(clock,0,0);
     VL_IN8(reset,0,0);
     CData/*0:0*/ Top__DOT___decoder_io_bundleRegDataControl_ctrlJump;
-    CData/*2:0*/ Top__DOT__decoder__DOT__ctrlsignals_0;
     CData/*0:0*/ Top__DOT__decoder__DOT___GEN_0;
+    CData/*2:0*/ Top__DOT__decoder__DOT__ctrlsignals_0;
+    CData/*0:0*/ Top__DOT__decoder__DOT___GEN_1;
     CData/*1:0*/ Top__DOT__decoder__DOT__ctrlsignals_1;
     CData/*1:0*/ Top__DOT__decoder__DOT__ctrlsignals_2;
-    CData/*0:0*/ Top__DOT__decoder__DOT___GEN_1;
+    CData/*0:0*/ Top__DOT__decoder__DOT___GEN_2;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __VicoFirstIteration;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clock__0;

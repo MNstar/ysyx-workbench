@@ -27,14 +27,35 @@ VL_INLINE_OPT void VTop___024root___ico_sequent__TOP__0(VTop___024root* vlSelf) 
         = ((0x13U != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
            & ((0x6fU == (0x7fU & vlSelf->Top__DOT___memInst_inst)) 
               | (0x67U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))));
-    vlSelf->Top__DOT__decoder__DOT___GEN_0 = ((0x123U 
+    vlSelf->Top__DOT__decoder__DOT___GEN_2 = ((0x13U 
+                                               == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+                                              | ((0x6fU 
+                                                  == 
+                                                  (0x7fU 
+                                                   & vlSelf->Top__DOT___memInst_inst)) 
+                                                 | ((0x67U 
+                                                     == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+                                                    | (0x17U 
+                                                       == 
+                                                       (0x7fU 
+                                                        & vlSelf->Top__DOT___memInst_inst)))));
+    vlSelf->Top__DOT__decoder__DOT___GEN_0 = ((0x100073U 
+                                               == vlSelf->Top__DOT___memInst_inst) 
+                                              | (0x1bU 
+                                                 == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)));
+    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = 
+        (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+          | ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+             | (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))
+          ? 1U : ((0x100073U == vlSelf->Top__DOT___memInst_inst)
+                   ? 2U : (0x1bU == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))));
+    vlSelf->Top__DOT__decoder__DOT___GEN_1 = ((0x123U 
                                                == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
                                               | ((0x37U 
                                                   == 
                                                   (0x7fU 
                                                    & vlSelf->Top__DOT___memInst_inst)) 
-                                                 | (0x100073U 
-                                                    == vlSelf->Top__DOT___memInst_inst)));
+                                                 | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0)));
     if ((0x13U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))) {
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 = 1U;
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 = 2U;
@@ -51,23 +72,11 @@ VL_INLINE_OPT void VTop___024root___ico_sequent__TOP__0(VTop___024root* vlSelf) 
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 
             = ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))
                 ? 2U : ((0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))
-                         ? 3U : (0x100073U == vlSelf->Top__DOT___memInst_inst)));
+                         ? 3U : (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0)));
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 
-            = ((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0) 
+            = ((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
                << 1U);
     }
-    vlSelf->Top__DOT__decoder__DOT___GEN_1 = ((0x13U 
-                                               == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                              | ((0x6fU 
-                                                  == 
-                                                  (0x7fU 
-                                                   & vlSelf->Top__DOT___memInst_inst)) 
-                                                 | ((0x67U 
-                                                     == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                                    | (0x17U 
-                                                       == 
-                                                       (0x7fU 
-                                                        & vlSelf->Top__DOT___memInst_inst)))));
     vlSelf->Top__DOT__decoder__DOT__imm = ((1U == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0))
                                             ? (((QData)((IData)(
                                                                 (0xfffffU 
@@ -137,14 +146,8 @@ VL_INLINE_OPT void VTop___024root___ico_sequent__TOP__0(VTop___024root* vlSelf) 
                                                                                 & (vlSelf->Top__DOT___memInst_inst 
                                                                                 >> 7U)))))
                                                                          : 0U)))))));
-    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = 
-        (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-          | ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-             | (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))
-          ? 1U : ((0x100073U == vlSelf->Top__DOT___memInst_inst) 
-                  << 1U));
-    vlSelf->Top__DOT___alu_io_resultAlu = (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-                                            | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0))
+    vlSelf->Top__DOT___alu_io_resultAlu = (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+                                            | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1))
                                             ? (((1U 
                                                  == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1))
                                                  ? vlSelf->Top__DOT__pcReg__DOT__regPC
@@ -255,13 +258,17 @@ VL_INLINE_OPT void VTop___024root___ico_sequent__TOP__0(VTop___024root* vlSelf) 
                                                     : 0U)))
                                             : 0U);
     vlSelf->Top__DOT__registers__DOT___regs_T_5 = (
-                                                   (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
+                                                   (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
                                                      | ((0x123U 
                                                          != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                                        & (0x37U 
-                                                           == 
-                                                           (0x7fU 
-                                                            & vlSelf->Top__DOT___memInst_inst)))) 
+                                                        & ((0x37U 
+                                                            == 
+                                                            (0x7fU 
+                                                             & vlSelf->Top__DOT___memInst_inst)) 
+                                                           | ((0x100073U 
+                                                               != vlSelf->Top__DOT___memInst_inst) 
+                                                              & (0x1bU 
+                                                                 == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)))))) 
                                                     & (0U 
                                                        != 
                                                        (0x1fU 
@@ -322,7 +329,7 @@ VL_INLINE_OPT void VTop___024root___nba_sequent__TOP__0(VTop___024root* vlSelf) 
          & (2U == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2)))) {
         VTop___024root____Vdpiimwrap_Top__DOT__decoder__DOT__dpi_box__DOT__npc_trap_TOP();
     }
-    if (((~ (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1)) 
+    if (((~ (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2)) 
          & (0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)))) {
         VTop___024root____Vdpiimwrap_Top__DOT__mem__DOT__dpi_box__DOT__pmem_write_TOP(vlSelf->Top__DOT___alu_io_resultAlu, 4U, 
                                                                                 ((0U 
@@ -718,14 +725,35 @@ VL_INLINE_OPT void VTop___024root___nba_sequent__TOP__0(VTop___024root* vlSelf) 
         = ((0x13U != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
            & ((0x6fU == (0x7fU & vlSelf->Top__DOT___memInst_inst)) 
               | (0x67U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))));
-    vlSelf->Top__DOT__decoder__DOT___GEN_0 = ((0x123U 
+    vlSelf->Top__DOT__decoder__DOT___GEN_2 = ((0x13U 
+                                               == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+                                              | ((0x6fU 
+                                                  == 
+                                                  (0x7fU 
+                                                   & vlSelf->Top__DOT___memInst_inst)) 
+                                                 | ((0x67U 
+                                                     == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+                                                    | (0x17U 
+                                                       == 
+                                                       (0x7fU 
+                                                        & vlSelf->Top__DOT___memInst_inst)))));
+    vlSelf->Top__DOT__decoder__DOT___GEN_0 = ((0x100073U 
+                                               == vlSelf->Top__DOT___memInst_inst) 
+                                              | (0x1bU 
+                                                 == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)));
+    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = 
+        (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+          | ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
+             | (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))
+          ? 1U : ((0x100073U == vlSelf->Top__DOT___memInst_inst)
+                   ? 2U : (0x1bU == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))));
+    vlSelf->Top__DOT__decoder__DOT___GEN_1 = ((0x123U 
                                                == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
                                               | ((0x37U 
                                                   == 
                                                   (0x7fU 
                                                    & vlSelf->Top__DOT___memInst_inst)) 
-                                                 | (0x100073U 
-                                                    == vlSelf->Top__DOT___memInst_inst)));
+                                                 | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0)));
     if ((0x13U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))) {
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 = 1U;
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 = 2U;
@@ -742,23 +770,11 @@ VL_INLINE_OPT void VTop___024root___nba_sequent__TOP__0(VTop___024root* vlSelf) 
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0 
             = ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN))
                 ? 2U : ((0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))
-                         ? 3U : (0x100073U == vlSelf->Top__DOT___memInst_inst)));
+                         ? 3U : (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0)));
         vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1 
-            = ((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0) 
+            = ((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
                << 1U);
     }
-    vlSelf->Top__DOT__decoder__DOT___GEN_1 = ((0x13U 
-                                               == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                              | ((0x6fU 
-                                                  == 
-                                                  (0x7fU 
-                                                   & vlSelf->Top__DOT___memInst_inst)) 
-                                                 | ((0x67U 
-                                                     == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                                    | (0x17U 
-                                                       == 
-                                                       (0x7fU 
-                                                        & vlSelf->Top__DOT___memInst_inst)))));
     vlSelf->Top__DOT__decoder__DOT__imm = ((1U == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_0))
                                             ? (((QData)((IData)(
                                                                 (0xfffffU 
@@ -828,14 +844,8 @@ VL_INLINE_OPT void VTop___024root___nba_sequent__TOP__0(VTop___024root* vlSelf) 
                                                                                 & (vlSelf->Top__DOT___memInst_inst 
                                                                                 >> 7U)))))
                                                                          : 0U)))))));
-    vlSelf->Top__DOT__decoder__DOT__ctrlsignals_2 = 
-        (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-          | ((0x123U == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-             | (0x37U == (0x7fU & vlSelf->Top__DOT___memInst_inst))))
-          ? 1U : ((0x100073U == vlSelf->Top__DOT___memInst_inst) 
-                  << 1U));
-    vlSelf->Top__DOT___alu_io_resultAlu = (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
-                                            | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_0))
+    vlSelf->Top__DOT___alu_io_resultAlu = (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
+                                            | (IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1))
                                             ? (((1U 
                                                  == (IData)(vlSelf->Top__DOT__decoder__DOT__ctrlsignals_1))
                                                  ? vlSelf->Top__DOT__pcReg__DOT__regPC
@@ -946,13 +956,17 @@ VL_INLINE_OPT void VTop___024root___nba_sequent__TOP__0(VTop___024root* vlSelf) 
                                                     : 0U)))
                                             : 0U);
     vlSelf->Top__DOT__registers__DOT___regs_T_5 = (
-                                                   (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_1) 
+                                                   (((IData)(vlSelf->Top__DOT__decoder__DOT___GEN_2) 
                                                      | ((0x123U 
                                                          != (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)) 
-                                                        & (0x37U 
-                                                           == 
-                                                           (0x7fU 
-                                                            & vlSelf->Top__DOT___memInst_inst)))) 
+                                                        & ((0x37U 
+                                                            == 
+                                                            (0x7fU 
+                                                             & vlSelf->Top__DOT___memInst_inst)) 
+                                                           | ((0x100073U 
+                                                               != vlSelf->Top__DOT___memInst_inst) 
+                                                              & (0x1bU 
+                                                                 == (IData)(vlSelf->Top__DOT__decoder__DOT___GEN)))))) 
                                                     & (0U 
                                                        != 
                                                        (0x1fU 
@@ -1041,7 +1055,7 @@ void VTop___024root___eval(VTop___024root* vlSelf) {
 #ifdef VL_DEBUG
             VTop___024root___dump_triggers__ico(vlSelf);
 #endif
-            VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 460, "", "Input combinational region did not converge.");
+            VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 461, "", "Input combinational region did not converge.");
         }
         __VicoIterCount = ((IData)(1U) + __VicoIterCount);
         __VicoContinue = 0U;
@@ -1057,7 +1071,7 @@ void VTop___024root___eval(VTop___024root* vlSelf) {
 #ifdef VL_DEBUG
             VTop___024root___dump_triggers__nba(vlSelf);
 #endif
-            VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 460, "", "NBA region did not converge.");
+            VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 461, "", "NBA region did not converge.");
         }
         __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
         __VnbaContinue = 0U;
@@ -1068,7 +1082,7 @@ void VTop___024root___eval(VTop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 VTop___024root___dump_triggers__act(vlSelf);
 #endif
-                VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 460, "", "Active region did not converge.");
+                VL_FATAL_MT("/home/tianyi/ysyx/ysyx-workbench/npc/build/Top.sv", 461, "", "Active region did not converge.");
             }
             vlSelf->__VactIterCount = ((IData)(1U) 
                                        + vlSelf->__VactIterCount);
