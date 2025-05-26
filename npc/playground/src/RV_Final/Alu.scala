@@ -22,10 +22,13 @@ class Alu extends Module {
         Seq(
             (option === ALU_ADD) -> (oprand1 + oprand2),
             (option === ALU_SUB) -> (oprand1 - oprand2),
-            (option === ALU_SLI) -> (oprand1 < oprand2)
+            (option === ALU_SLI) -> (oprand1 < oprand2),
+            (option === ALU_SLL) -> (oprand1 << oprand2(5, 0)),
+            (option === ALU_AND) -> (oprand1 & oprand2),
         )
     )
     io.resultAlu := result
+
 }
 
 

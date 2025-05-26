@@ -7,10 +7,11 @@ import chisel3.util._
 
 class DPIBox_Mem extends BlackBox with HasBlackBoxResource with HasBlackBoxPath with HasBlackBoxInline{
     val io = IO(new Bundle {
-        val clock = Input(Clock())
-        val ctrlStore  = Input(Bool())
+        val clock     = Input(Clock())
+        val ctrlStore = Input(Bool())
         val ctrlLoad  = Input(Bool())
-        val wdata      = Input(UInt(32.W))
+        val wdata     = Input(UInt(32.W))
+        val len       = Input(UInt(32.W))
         val paddr     = Input(UInt(32.W))
         val rdata     = Output(UInt(32.W))
     })
@@ -22,6 +23,7 @@ class DPIBox_Mem extends BlackBox with HasBlackBoxResource with HasBlackBoxPath 
         |  input ctrlLoad,
         |  input [31:0] wdata,
         |  input [31:0] paddr,
+        |  input [31:0] len,
         |  output logic [31:0] rdata
         |);
         |  import "DPI-C" function int pmem_read(input int addr, input int len);
@@ -29,10 +31,10 @@ class DPIBox_Mem extends BlackBox with HasBlackBoxResource with HasBlackBoxPath 
         |         input int addr, input int len, input int redata);
         |    always @(posedge clock) begin
         |     if(ctrlLoad) begin
-        |           rdata <= pmem_read(paddr, 4);
+        |           rdata <= pmem_read(paddr, len);
         |       end
         |     if(ctrlStore) begin
-        |           pmem_write(paddr, 4, wdata);
+        |           pmem_write(paddr, len, wdata);
         |       end 
         |    end  
         |endmodule
@@ -56,9 +58,20 @@ class mem extends Module {
     dpi_box.io.clock     := io.clock
     dpi_box.io.ctrlStore := io.bundleMemDataControl.ctrlStore
     dpi_box.io.ctrlLoad  := io.bundleMemDataControl.ctrlLoad
+    dpi_box.io.len       := io.bundleMemDataControl.memSize
     dpi_box.io.paddr     := io.paddr
-    dpi_box.io.wdata     := io.wdata    
-    io.rdata             := dpi_box.io.rdata
+    dpi_box.io.wdata     := io.wdata   
+
+    val raw = dpi_box.io.rdata
+    val signExt = Mux(~io.bundleMemDataControl.ctrlLoad, 0.U(32.W), MuxCase(
+        0.U(32.W),
+        Seq(
+            (io.bundleMemDataControl.memSize === 1.U(32.W)) -> Cat(Fill(24, raw(7)), raw(7, 0)),
+            (io.bundleMemDataControl.memSize === 2.U(32.W)) -> Cat(Fill(16, raw(15)), raw(15, 0)),
+            (io.bundleMemDataControl.memSize === 4.U(32.W)) -> raw,
+        )
+    ))
+    io.rdata := signExt
     
 }
 

@@ -12,6 +12,7 @@ class BundleReg extends Bundle {
 class BundleMemDataControl extends Bundle {
     val ctrlLoad = Output(Bool())
     val ctrlStore = Output(Bool())
+    val memSize = Output(UInt(32.W))
 }
 
 class BundleRegDataControl extends Bundle {

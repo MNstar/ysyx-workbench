@@ -67,6 +67,7 @@ verilog:
 	$(call git_commit, "generate verilog")
 	mkdir -p $(VERILOG_DIR)
 	mill -i $(PRJ).runMain Elaborate --target-dir $(VERILOG_DIR)
+	python clean.py
 
 help:
 	mill -i $(PRJ).runMain Elaborate --help
