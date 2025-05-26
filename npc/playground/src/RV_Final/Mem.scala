@@ -61,7 +61,8 @@ class mem extends Module {
     dpi_box.io.len       := io.bundleMemDataControl.memSize
     dpi_box.io.paddr     := io.paddr
     dpi_box.io.wdata     := io.wdata   
-
+    printf(p"len = ${dpi_box.io.len}\n")
+    printf(p"rdata = ${dpi_box.io.rdata}\n")
     val raw = dpi_box.io.rdata
     val signExt = Mux(~io.bundleMemDataControl.ctrlLoad, 0.U(32.W), MuxCase(
         0.U(32.W),

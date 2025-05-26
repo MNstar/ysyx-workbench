@@ -14,7 +14,7 @@ const char *regs[] = {
 
 void isa_reg_display() {
     for (int i = 0; i < 32; i++) {
-        printf("reg is %-4s,    value = 0x%08x\n", regs[i], dut->rootp->Top__DOT__registers__DOT___GEN[i]);
+        printf("reg is %-4s,    value = %#x\n", regs[i], dut->rootp->Top__DOT__registers__DOT___GEN[i]);
     }
     printf("PC  : 0x%08x\n", dut->io_pc);
 }
